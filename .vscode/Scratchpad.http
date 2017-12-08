@@ -1,0 +1,10 @@
+@localurl = localhost:7071/api/sort
+@remoteurl = springonedemo.azurewebsites.net/api/sort
+
+GET http://{{localurl}} HTTP/1.1
+    ?list=56,87,1,56,190,1,78,9
+
+###
+
+GET http://{{remoteurl}} HTTP/1.1
+    ?list=56,87,1,56,190,1,78,9

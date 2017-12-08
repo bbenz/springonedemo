@@ -11,7 +11,7 @@ public class Function {
     /**
      * This function listens at endpoint "/api/sort". Two ways to invoke it using "curl" command in bash:
      * 1. curl -d "HTTP Body" {your host}/api/sort
-     * 2. curl {your host}/api/hello?name=HTTP%20Query
+     * 2. curl {your host}/api/sort?name=HTTP%20Query
      */
     @FunctionName("sort")
     public HttpResponseMessage<String> sort(
@@ -21,13 +21,13 @@ public class Function {
         context.getLogger().info("Java HTTP trigger processed a request.");
 
         // Parse query parameter
-        String query = request.getQueryParameters().get("lists");
+        String query = request.getQueryParameters().get("list");
         String list = request.getBody().orElse(query);
 
         if (list == null) {
             return request.createResponse(400, "Please pass a list on the query string or in the request body");
         } else {
-            return request.createResponse(200, "Sorted List: " + Sorted(list));
+            return request.createResponse(200, "Sorted List: " + BubbleSort(list));
         }
     }
 
@@ -36,7 +36,7 @@ public class Function {
      * @param   numbers a string of numbers e.g. "3,1,6"
      * @return          a sorted string e.g. "[1,2,6]"
      */
-    public String ort(String numbers) {
+    public String BubbleSort(String numbers) {
         int[] intArray = Arrays.stream(numbers.split(",")).mapToInt(Integer::parseInt).toArray();
         int n = intArray.length;
         int temp = 0;
